@@ -1,11 +1,42 @@
 const mongoose = require('mongoose');
  
+const VacinasSchema = require('./vacinas')
+
+const vacinasCaesSchema = new mongoose.Schema(
+    {
+        vacina_id: {                                
+            type: mongoose.Schema.Types.ObjectId,
+            ref: VacinasSchema,
+            required: false,
+        },
+        dose: {
+            type: Number,
+            required: false
+        },
+        lote: {
+            type: String,
+            required: false
+        },
+        createdAt: {
+            type: Date,
+            required: false
+        },
+        updateAt: {
+            type: Date,
+            required: false
+        }
+    }
+); 
+
 const Caes = mongoose.model('Caes', {
     nome: String,
     raca: String,
     nascimento: Date,
-    castrado: Boolean,
-    // vacinas: Aprender como fazer o schema para as vacinas
+    castrado: String,
+    carteiraVacinas: 
+    [
+        vacinasCaesSchema
+    ],
     sexo: {
         type: String,
         enum:["Macho", "Fêmea"]

@@ -1,10 +1,13 @@
 const CaesModule = require('../models/caes');
+const VacinaModule = require('../models/vacinas');
 
 class CaesController {
     static async create(req, res) {
         const { nome,
                 raca,
                 nascimento,
+                castrado,
+                carteiraVacinas,
                 sexo,
                 cor,
                 porte,
@@ -19,27 +22,31 @@ class CaesController {
                 observacoes_adicionais
             } = req.body;
     
-    if( !nome                   ||
-        !raca                   ||
-        !nascimento             ||
-        !sexo                   || 
-        !cor                    || 
-        !porte                  ||
-        !peso                   ||
-        !data_chegada           ||
+    // if( !nome                   ||
+    //     !raca                   ||
+    //     !nascimento             ||
+    //     !castrado               ||
+    //     !carteiraVacina         ||
+    //     !sexo                   || 
+    //     !cor                    || 
+    //     !porte                  ||
+    //     !peso                   ||
+    //     !data_chegada           ||
         
-        !descricao_curta        ||
-        !descricao_longa        ||
-        !status_adocao          ||
-        !foto                   ||
+    //     !descricao_curta        ||
+    //     !descricao_longa        ||
+    //     !status_adocao          ||
+    //     !foto                   ||
         
-        !observacoes_adicionais )
-    return res.status(400).send({ message: "Dados inválidos - Falta algum valor" })
+    //     !observacoes_adicionais )
+    // return res.status(400).send({ message: "Dados inválidos - Falta algum valor" })
 
         const cao = {
             nome: nome,
             raca: raca,
             nascimento: nascimento,
+            castrado: castrado,
+            carteiraVacinas: carteiraVacinas,
             sexo: sexo,
             cor: cor,
             porte: porte,
@@ -53,6 +60,7 @@ class CaesController {
             data_adocao: data_adocao,
             observacoes_adicionais: observacoes_adicionais
         }
+        
 
         try {
             const caoCriado = await CaesModule.create(cao);
