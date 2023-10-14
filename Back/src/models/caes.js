@@ -4,6 +4,8 @@ const Caes = mongoose.model('Caes', {
     nome: String,
     raca: String,
     nascimento: Date,
+    castrado: Boolean,
+    // vacinas: Aprender como fazer o schema para as vacinas
     sexo: {
         type: String,
         enum:["Macho", "Fêmea"]
