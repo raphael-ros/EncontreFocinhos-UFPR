@@ -1,6 +1,6 @@
-const ONGModule = require('../models/ONG');
+const OngModule = require('../models/ongs');
 
-class ONGController {
+class OngController {
     static async create(req, res) {
         const { nome,
                 telefone,
@@ -8,9 +8,20 @@ class ONGController {
                 endereco,
                 cidade,
                 estado,
-                descricao } = req.body;
+                missao,
+                historia,
+                responsavel
+            } = req.body;
     
-    if(!nome || !telefone || !cnpj || !endereco || !cidade || !estado || !descricao)
+    if( !nome       ||
+        !telefone   ||
+        !cnpj       ||
+        !endereco   || 
+        !cidade     || 
+        !estado     ||
+        !missao     ||
+        !historia   ||
+        !responsavel)
     return res.status(400).send({ message: "Dados inválidos - Falta algum valor" })
 
         const ong = {
@@ -20,12 +31,14 @@ class ONGController {
             endereco: endereco,
             cidade: cidade,
             estado: estado,
-            descricao: descricao
+            missao: missao,
+            historia: historia,
+            responsavel: responsavel
         }
 
         try {
-            const o = await ONGModule.create(ong);
-            return res.status(201).send({ message: "ONG inserida com sucesso", o });       
+            const ongCriada = await OngModule.create(ong);
+            return res.status(201).send({ message: "ONG inserida com sucesso", ongCriada });       
             
         } catch (error) {
             console.log(error);
@@ -36,8 +49,8 @@ class ONGController {
 
     static async getAll(req, res){
         try {
-            const ong = await ONGModule.find();
-            return res.status(200).send({ ong });
+            const ongCadastradas = await OngModule.find();
+            return res.status(200).send({ ongCadastradas });
         } catch (error) {
             return res.status(500).send({ message: "Deu algo errado - GetAll" })
         }
@@ -47,9 +60,9 @@ class ONGController {
         const {id} = req.params;
         
         try {
-            const ong = await ONGModule.findById(id);
+            const ong = await OngModule.findById(id);
             if (!ong) {
-                return res.status(404).send({ message: "ONG não encontrado - GetById" })
+                return res.status(404).send({ message: "ONG não encontrada - GetById" })
             }
 
             return res.status(200).send({ ong });
@@ -67,23 +80,35 @@ class ONGController {
                 endereco,
                 cidade,
                 estado,
-                descricao } = req.body;
+                missao,
+                historia,
+                responsavel } = req.body;
         
-        if(!nome || !telefone || !cnpj || !endereco || !cidade || !estado || !descricao )
+        if( !nome       ||
+            !telefone   ||
+            !cnpj       ||
+            !endereco   || 
+            !cidade     || 
+            !estado     ||
+            !missao     ||
+            !historia   ||
+            !responsavel)
         return res.status(400).send({ message: "Dados inválidos" })
      
         const novaONG = { 
-                        nome,
-                        telefone,
-                        cnpj,
-                        endereco,
-                        cidade,
-                        estado,
-                        descricao };
+                            nome,
+                            telefone,
+                            cnpj,
+                            endereco,
+                            cidade,
+                            estado,
+                            missao,
+                            historia,
+                            responsavel };
         
         try {
-            const ong = await ONGModule.findByIdAndUpdate(id, novaONG);
-            return res.status(200).send({ message: "ONG atualizado", ong:ong })
+            const ong = await OngModule.findByIdAndUpdate(id, novaONG);
+            return res.status(200).send({ message: "ONG atualizada", "Dados atualizados":novaONG })
         
         } catch (error) {
             console.log(error.message)
@@ -95,7 +120,7 @@ class ONGController {
         const {id} = req.params;
 
         try {
-            await ONGModule.findByIdAndRemove(id)
+            await OngModule.findByIdAndRemove(id)
             return res.status(200).send({ message: "ONG deletada" })
         
         } catch (error) {
@@ -104,4 +129,4 @@ class ONGController {
     }
 }
 
-module.exports = ONGController
+module.exports = OngController;

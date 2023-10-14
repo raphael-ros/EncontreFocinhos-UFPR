@@ -1,21 +1,21 @@
 const express = require('express');
 const router = express.Router();
-const ONGController = require('../controller/ONGController');
+const OngController = require('../controller/OngController');
  
 router
 
-    .post('/', ONGController.create)
+    .post('/', OngController.create)
 
     //getAll
-    .get('/', ONGController.getAll) 
+    .get('/', OngController.getAll) 
 
     //getById
-    .get('/:id', ONGController.getById)
+    .get('/:id', OngController.getById)
 
     //Dar o get e Atualizar
-    .put('/:id', ONGController.updateOne)
+    .put('/:id', OngController.updateOne)
 
     //Deletar
-    .delete('/:id', ONGController.deleteOne)
+    .delete('/:id', OngController.deleteOne)
  
 module.exports = router
