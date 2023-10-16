@@ -1,19 +1,17 @@
-<!--Card com as informações das ONGs-->
-<div class="card-geral">
-    <div class="ong-img">
-        <img src="ongPerfil.jpg" alt="Imagem de Perfil da ONG">
-    </div>
-    <div class="ong-infos">
-        <h3>Nome da ONG</h3>
-        <div class="endereco">
-            <p>Endereço:</p>
-            <a href="http://" target="_blank" rel="noopener noreferrer">Endereço Cadastrado no banco</a>
-            <FontAwesomeIcon icon="fa-solid fa-location-dot" />
-        </div>
-        <p><strong>Sobre</strong>: Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae debitis alias dignissimos optio mollitia. Cupiditate, laborum quis earum enim repellendus rem ea incidunt, possimus, totam non eos sed! Quas, eos.</p>
+import React from 'react';
+import './Card.css';
 
-        <button type="button">Ver mais <i class="fa-solid fa-chevron-right"></i>
-        <!-- <FontAwesomeIcon icon="fa-solid fa-chevron-right" /></button> -->
-        
+const Card = ({ title, description, link }) => {
+ return (
+    <div className="card">
+      <h2>{title}</h2>
+      <p>{description}</p>
+      <a href={link} target="_blank" rel="noopener noreferrer">
+        Ver mais >
+      </a>
     </div>
-</div>
+ );
+};
+
+
+export default Card;
